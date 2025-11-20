@@ -11,30 +11,33 @@ private:
     void resize() {
         cout << "Resize: " << capacity << " -> " << capacity * 2 << endl;
 
-        /* TODO */
-        // capacity의 크기를 2배로 늘리고, 새로운 배열을 생성하세요.
-        // 기존 데이터를 새로운 배열로 복사한 뒤, 기존 배열을 해제하세요.
+        size_t newcap = capacity*2;
+        int* newData = new int[newcap];
+
+        for(size_t i = 0; i < length; i++)
+        newData[i] = data[i];
+       
+        delete[] data;
+        data = newData;
+        capacity = newcap;
     }
 
 public:
 
     // 초기 capacity를 2로 설정하고, length는 0으로 초기화하세요.
     MyIntVector() : capacity(2), length(0) {
-        /* TODO */
-        // data는 capacity 크기의 배열을 동적 할당하세요.
+        data = new int[capacity];
     }
 
     ~MyIntVector() {
-        /* TODO */
-        // 동적 할당된 data를 해제하세요.
+        delete[] data;
     }
 
     void push_back(const int& value) {
-        /* TODO */
-        // length가 capacity에 도달하면 resize()를 호출하세요.
+      if(length == capacity)
+        resize();
 
-        /* TODO */
-        // 새로운 요소를 배열 끝에 추가하고 length를 증가시키세요.
+        data[length++]=value;
     }
 
     // 마지막 항목을 리턴하세요.
